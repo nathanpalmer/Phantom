@@ -22,9 +22,10 @@ namespace Phantom.Core.Builtins {
     using System.Xml;
 
     [CompilerGlobalScope]
-    public sealed class XmlPoke {
+    public sealed class Xml {
+
         public static string xmlpeek(string filename, string xpath, string property) {
-            Console.WriteLine(string.Format("Peeking at '{0}' with XPath expression '{1}'.", filename, xpath));
+            //Console.WriteLine(string.Format("Peeking at '{0}' with XPath expression '{1}'.", filename, xpath));
 
             if (!File.Exists(filename)) {
                 throw new FileNotFoundException(string.Format("The file {0} was not found", filename), filename);

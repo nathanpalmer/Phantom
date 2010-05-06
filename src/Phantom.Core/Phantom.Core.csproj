@@ -104,7 +104,7 @@
     <Compile Include="Builtins\FileList.cs" />
     <Compile Include="Builtins\NCover.cs" />
     <Compile Include="Builtins\NCoverExplorer.cs" />
-    <Compile Include="Builtins\XmlPoke.cs" />
+    <Compile Include="Builtins\Xml.cs" />
     <Compile Include="Builtins\XUnit.cs" />
     <Compile Include="ExcludeFromCoverageAttribute.cs" />
     <Compile Include="Language\ExpressionToCallTargetNameStep.cs" />

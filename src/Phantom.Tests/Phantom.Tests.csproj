@@ -114,6 +114,7 @@
     <Compile Include="TargetsTester.cs" />
     <Compile Include="TestHelper.cs" />
     <Compile Include="WithMacroTester.cs" />
+    <Compile Include="XmlTester.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\AssemblyInfoGenerator.boo">
@@ -166,6 +167,9 @@
     </None>
     <None Include="Scripts\WithMacroTest.boo">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Scripts\Xml.boo">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -224,6 +228,9 @@
     </Content>
     <Content Include="Views\Shared\LogOnUserControl.ascx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="_revision.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
