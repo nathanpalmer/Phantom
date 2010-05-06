@@ -33,8 +33,12 @@ namespace Phantom.Core.Builtins {
 		}
 
 		private string BuildMsbuildPath(string version) {
-			if(version == "4.0" || version == "4") {
-				version = "4.0.30319";
+			if(version == "4.0" || version == "4") {                
+				version = "4.0.30128"; // Beta version
+                if (File.Exists(Path.Combine(Environment.GetEnvironmentVariable("windir"), "Microsoft.NET/Framework/v" + version + "/msbuild.exe"))) {
+                    return Path.Combine(Environment.GetEnvironmentVariable("windir"), "Microsoft.NET/Framework/v" + version + "/msbuild.exe");
+                }
+                version = "4.0.30319";
 			}
 
 			return Path.Combine(Environment.GetEnvironmentVariable("windir"), "Microsoft.NET/Framework/v" + version + "/msbuild.exe");

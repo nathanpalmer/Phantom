@@ -23,6 +23,9 @@ namespace Phantom.Core.Builtins {
 
 	[CompilerGlobalScope]
 	public sealed class IOFunctions {
+
+
+
 		/// <summary>
 		///   Executes the specified program with the specified arguments
 		/// </summary>
@@ -46,21 +49,25 @@ namespace Phantom.Core.Builtins {
 		///   A hash of options to set on the process (like WorkingDir)
 		/// </param>
 		public static void exec(string command, string args, Hash options) {
-			string workingDir = options.ObtainAndRemove("WorkingDir", ".");
-			bool ignoreNonZeroExitCode = options.ObtainAndRemove("IgnoreNonZeroExitCode", false);
-			var psi = new ProcessStartInfo(command, args) {
-				WorkingDirectory = workingDir,
-				UseShellExecute = false,
-				RedirectStandardError = true
-			};
-			var process = Process.Start(psi);
-			process.WaitForExit();
-			var exitCode = process.ExitCode;
+            Exec exec = new Exec();
+		    exec.ExeName = command;
+		    exec.Output = (options.ContainsKey("Output")) ? new FileInfo(options.ObtainAndRemove("Output", "")) : null;
+            exec.Execute(args, options);
+            //string workingDir = options.ObtainAndRemove("WorkingDir", ".");
+            //bool ignoreNonZeroExitCode = options.ObtainAndRemove("IgnoreNonZeroExitCode", false);
+            //var psi = new ProcessStartInfo(command, args) {
+            //    WorkingDirectory = workingDir,
+            //    UseShellExecute = false,
+            //    RedirectStandardError = true
+            //};
+            //var process = Process.Start(psi);
+            //process.WaitForExit();
+            //var exitCode = process.ExitCode;
 
-			if (exitCode != 0 && ignoreNonZeroExitCode == false) {
-			    var errortext = process.StandardError.ReadAllAsString();
-                throw new ExecutionFailedException(exitCode, errortext);
-			}
+            //if (exitCode != 0 && ignoreNonZeroExitCode == false) {
+            //    var errortext = process.StandardError.ReadAllAsString();
+            //    throw new ExecutionFailedException(exitCode, errortext);
+            //}
 		}
 
 		public static void exec(string command, Hash options) {
@@ -72,7 +79,7 @@ namespace Phantom.Core.Builtins {
 
 		public static void exec(string command) {
 			exec(command, new Hash());
-		}
+		}        
 
 		/// <summary>
 		///   Copies a file from one location to another.

@@ -16,6 +16,7 @@
 
 namespace Phantom.Tests {
 	using System;
+	using System.IO;
 	using NUnit.Framework;
 
 	public class ExecTester : ScriptTest {
@@ -67,5 +68,19 @@ namespace Phantom.Tests {
 			Execute("non_zero_exit");
 			Environment.ExitCode.ShouldEqual(1);
 		}
+
+        [Test]
+        public void Phantom_returns_non_zero_exit_code_and_writes_output() {
+            var tempFile = new FileInfo("output.tmp");
+            if (tempFile.Exists) {
+                tempFile.Delete();
+            }
+
+            ScriptFile = "Scripts\\Exec.boo";
+            Execute("clean_exit_output");
+
+            tempFile.Refresh();
+            Assert.AreEqual(true, tempFile.Exists);
+        }
 	}
 }

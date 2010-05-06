@@ -29,6 +29,7 @@ namespace Phantom.Core.Builtins {
 
 		public string include { get; set; }
 		public string exclude { get; set; }
+        public string version { get; set; }
 		public bool enableTeamCity { get; set; }
 		public string teamCityArgs { get; set; }
 		public string[] assemblies { get; set; }
@@ -78,6 +79,10 @@ namespace Phantom.Core.Builtins {
 					args.Add(string.Format("/exclude:{0}", exclude));
 				}
 			}
+
+            if (!string.IsNullOrEmpty(version)) {
+                args.Add(string.Format("/framework=net-{0}", version));
+            }
 
 			foreach (var asm in assemblies) {
 				var nunitArgs = new List<string>(args) {
