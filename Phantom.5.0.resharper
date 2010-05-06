@@ -91,4 +91,7 @@ You must not remove this notice, or any other, from this software.]]></FileHeade
       <PredefinedRule Inspect="True" Prefix="" Suffix="" Style="AaBb" ElementKind="Other" />
     </Naming2>
   </CodeStyleSettings>
+  <CodeAnnotations>
+    <DefaultNamespace>JetBrains.Annotations</DefaultNamespace>
+  </CodeAnnotations>
 </Configuration>
