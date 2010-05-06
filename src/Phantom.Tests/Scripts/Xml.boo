@@ -2,6 +2,6 @@
 	print "foo"
 
 target xmlpeek_property:
-	version_revision = xmlpeek('_revision.xml', '/info/entry/commit/@revision', 'version.revision')
+	version_revision = xmlpeek('_revision.xml', '/info/entry/@revision', 'version.revision')
 	print version_revision
 	

@@ -87,19 +87,21 @@
                 WorkingDirectory = workingDir,
                 UseShellExecute = false,
                 RedirectStandardError = true,
-                RedirectStandardOutput = true
+                RedirectStandardOutput = (Output != null) ? true : false
             };
             var process = Process.Start(psi);
-            
-            outputThread = new Thread(StreamReaderThread_Output);
 
-            _stdOut = process.StandardOutput;
-
-            outputThread.Start();
+            if (Output != null) {
+                outputThread = new Thread(StreamReaderThread_Output);
+                _stdOut = process.StandardOutput;
+                outputThread.Start();
+            }
 
             process.WaitForExit();
-            
-            outputThread.Join(2000);
+
+            if (Output != null) {
+                outputThread.Join(2000);
+            }
 
             var exitCode = process.ExitCode;
 
