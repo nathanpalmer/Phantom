@@ -24,20 +24,16 @@ namespace Phantom.Core.Builtins {
 	public class nunit : ExecutableTool<nunit> {
 		public nunit() {
 			toolPath = "lib/nunit/nunit-console.exe";
-			teamCityArgs = "v2.0 x86 NUnit-2.4.6";
+		    dotnet_version = "2.0";
+		    version = "2.4.8";
 		}
 
 		public string include { get; set; }
 		public string exclude { get; set; }
         public string version { get; set; }
-		public bool enableTeamCity { get; set; }
-		public string teamCityArgs { get; set; }
+        public string dotnet_version { get; set; }
 		public string[] assemblies { get; set; }
 		public string assembly { get; set; }
-
-		string GetTeamCityNunitLancherPath() {
-			return UtilityFunctions.env("teamcity.dotnet.nunitlauncher");
-		}
 
 		protected override void Execute() {
 			if ((assemblies == null || assemblies.Length == 0) && string.IsNullOrEmpty(assembly)) {
@@ -51,8 +47,14 @@ namespace Phantom.Core.Builtins {
 
 			var args = new List<string>();
 
+		    bool enableTeamCity = false;
+		    string teamcityLauncherPath = UtilityFunctions.env("teamcity.dotnet.nunitlauncher");
+		    if (!string.IsNullOrEmpty(teamcityLauncherPath)) {
+                enableTeamCity = true;
+            }
+
 			if (enableTeamCity) {
-				string teamcityLauncherPath = GetTeamCityNunitLancherPath();
+                string teamCityArgs = string.Format("v{0} x86 NUnit-{1}", dotnet_version, version);
 
 				if (!string.IsNullOrEmpty(teamcityLauncherPath)) {
 					toolPath = teamcityLauncherPath;
@@ -80,8 +82,10 @@ namespace Phantom.Core.Builtins {
 				}
 			}
 
-            if (!string.IsNullOrEmpty(version)) {
-                args.Add(string.Format("/framework=net-{0}", version));
+            if (!string.IsNullOrEmpty(dotnet_version)) {
+                if (!enableTeamCity && new Version(version) >= new Version("2.5.5")) {
+                    args.Add(string.Format("/framework=net-{0}", dotnet_version));
+                }
             }
 
 			foreach (var asm in assemblies) {
