@@ -49,12 +49,12 @@ namespace Phantom.Integration.NAnt {
 		#endregion
 
 		public IEnumerable<Import> BuildImportsFrom(string assemblyNameOrPath) {
-			var assembly = Assembly.Load(assemblyNameOrPath);
+            var assembly = Assembly.Load(assemblyNameOrPath);
 			var location = assembly.Location;
 
 			var adapterPath = Path.ChangeExtension(location, ".Phantom.dll");
 			var importsPath = Path.ChangeExtension(location, ".Phantom.imports");
-			var adapterNamespace = "PhantomIntegratedTasks";
+            var adapterNamespace = assemblyNameOrPath.Replace(".","");
 
 			if (!File.Exists(adapterPath))
 				BuildAdapter(assembly, adapterNamespace, adapterPath, importsPath);
@@ -84,7 +84,7 @@ namespace Phantom.Integration.NAnt {
 			                               	             	OutputType = CompilerOutputType.Library,
 			                               	             	Pipeline = new CompileToFile(),
 			                               	             	OutputAssembly = adapterPath,
-			                               	             	Input = {new StringInput("integration.boo", code)}
+                                                            Input = { new StringInput(new FileInfo(Path.ChangeExtension(adapterPath, ".boo")).Name, code) }
 			                               	             }
 			                               };
 			compiler.Parameters.Pipeline.InsertBefore(typeof (ExpandAstLiterals), new UnescapeNamesStep());
@@ -100,6 +100,8 @@ namespace Phantom.Integration.NAnt {
 			if (result.Errors.Count > 0) {
 				File.WriteAllText(Path.ChangeExtension(adapterPath, ".boo"), code);
 				throw new CompilerError(result.Errors.ToString(true));
+			} else {
+                File.WriteAllText(Path.ChangeExtension(adapterPath, ".boo"), code);
 			}
 
 			using (var writer = new StreamWriter(importsPath, false)) {
@@ -123,7 +125,7 @@ namespace Phantom.Integration.NAnt {
 
 			builder.AppendLine("import Phantom.Core.Integration");
 			builder.AppendLine("import Phantom.Core.Language");
-			builder.AppendLine("import Phantom.Integration.NAnt");
+			builder.AppendLine("import Phantom.Integration.NAnt\r\n");
 
 			foreach (var task in tasks) {
 				AppendTaskAdapter(builder, task, referencedTypes);

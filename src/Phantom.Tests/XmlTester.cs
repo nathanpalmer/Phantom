@@ -17,5 +17,16 @@ namespace Phantom.Tests
             Execute("xmlpeek_property");
             AssertOutput("xmlpeek_property:", "Found '1' nodes with the XPath expression '/info/entry/@revision'.", "57");
         }
+
+        [Test]
+        public void XmlPoke()
+        {
+            ScriptFile = "Scripts/Xml.boo";
+            Execute("xmlpoke");
+            AssertOutput(
+                "xmlpoke:",
+                "Found '1' nodes matching XPath expression '/info/entry/@kind'.");
+        }
+
     }
 }

@@ -64,6 +64,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\boo\Boo.Lang.Useful.dll</HintPath>
     </Reference>
+    <Reference Include="FtpUploadTask, Version=1.0.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\nant\FtpUploadTask.dll</HintPath>
+    </Reference>
     <Reference Include="log4net, Version=1.2.9.0, Culture=neutral, PublicKeyToken=b32731d11ce58905">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\nant\log4net.dll</HintPath>
@@ -71,6 +75,9 @@
     <Reference Include="NAnt.Core, Version=0.85.2478.0, Culture=neutral">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\nant\NAnt.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="NAnt.Echo2">
+      <HintPath>..\..\lib\nant\NAnt.Echo2.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=2.5.0.9122, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -149,6 +156,9 @@
     </None>
     <None Include="Scripts\LongDescription.boo">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Scripts\NantIncludeTasks.boo">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Scripts\NantTasks.boo">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

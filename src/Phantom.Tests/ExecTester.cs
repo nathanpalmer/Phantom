@@ -81,6 +81,6 @@ namespace Phantom.Tests {
 
             tempFile.Refresh();
             Assert.AreEqual(true, tempFile.Exists);
-        }
+        }	  
 	}
 }

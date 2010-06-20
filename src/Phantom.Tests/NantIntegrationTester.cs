@@ -25,5 +25,12 @@ namespace Phantom.Tests {
 			Execute("default");
 			AssertOutput("default:", "     [echo] Test");
 		}
+
+        [Test]
+        public void Executes_echo2_double_import() {
+            ScriptFile = "Scripts/NantTasks.boo";
+            Execute("echo2");
+            AssertOutput("echo2:", "Echo2: Test");
+        }
 	}
 }

@@ -6,10 +6,10 @@
     using Boo.Lang;
 
     public class Exec {
-        private StreamReader _stdError;
+        //private StreamReader _stdError;
         private StreamReader _stdOut;
         private TextWriter _outputWriter;
-        private TextWriter _errorWriter;
+        //private TextWriter _errorWriter;
         private string _exeName;
 
         /// <summary>
