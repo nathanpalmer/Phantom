@@ -55,7 +55,14 @@ namespace Phantom.Core {
 				Debugger.Launch();
 
 			var script = GenerateBuildScript(options.File);
-			script.ExecuteTargets(options.TargetNames.ToArray());
+            try
+            {
+                script.ExecuteTargets(options.TargetNames.ToArray());
+            }
+            catch (Exception)
+            {
+                Environment.ExitCode = 1;
+            }
 		}
 
 		public void OutputTargets(PhantomOptions options) {
