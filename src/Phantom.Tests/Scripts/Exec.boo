@@ -14,7 +14,7 @@ target clean_exit_singlestr:
 	exec("..\\..\\Scripts\\Support\\ExitTest.exe 0")
 
 target clean_exit_output:
-	exec("svn info --xml", { 'Output': 'output.tmp' })
+	exec("dir", { 'Output': 'output.tmp' })
 
 target non_zero_exit_singlestr:
 	exec("..\\..\\Scripts\\Support\\ExitTest.exe 99")
