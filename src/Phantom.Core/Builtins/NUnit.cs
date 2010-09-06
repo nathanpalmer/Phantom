@@ -89,9 +89,7 @@ namespace Phantom.Core.Builtins {
             }
 
 			foreach (var asm in assemblies) {
-				var nunitArgs = new List<string>(args) {
-				                                       	asm
-				                                       };
+				var nunitArgs = new List<string>(args) { "\"" + asm + "\"" };
 
 				Execute(nunitArgs.JoinWith(" "));
 			}

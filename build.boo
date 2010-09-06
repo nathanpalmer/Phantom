@@ -17,7 +17,7 @@ target compile:
 
 desc "Executes tests"
 target test:
-  nunit(assembly: test_assemblies, enableTeamCity: true)
+  nunit(assembly: test_assemblies)
 
 desc "Copies the binaries to the 'build' directory"
 target deploy:
